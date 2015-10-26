@@ -6,9 +6,16 @@ require 'pry'
 
 class OffsetTest < Minitest::Test
 
+  def setup
+    @offset = Offset.new
+  end
+
   def test_there_is_a_generated_key
-    offset = Offset.new
-    refute_equal nil, offset.generate_key
+    refute_equal nil, @offset.generate_total_offset
+  end
+
+  def test_input_0_equals_array
+    
   end
 
   def test_it_takes_a_5_digit_number
@@ -58,14 +65,11 @@ class OffsetTest < Minitest::Test
 
   def test_date_offset_is_an_array_of_integers
     skip
-
   end
-
   # TOTAL OFFSET
 
   def test_total_offset_is_an_array_of_4_values
     skip
-
   end
 
 

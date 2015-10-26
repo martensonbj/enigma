@@ -7,30 +7,23 @@ class Offset
   attr_accessor :total_offset  # => nil
   # RETURNS AN ARRAY OF 4 FIXNUMS
 
-  def initialize(key, date)
-    key = Key.new.generate_key_offset
-    date = Date_Offset.new.generate_key_offset
-    @total_offset = nil
-  end                        # => :initialize
+  def initialize
+    @total_offset = total_offset  # => nil
+  end                             # => :initialize
 
-  def generate_total_offset(key, date)
-    @total_offset = @key_offset.zip(@date_offset).map { |pair| pair.reduce(&:+)}
+  def generate_total_offset
+    key = Key.new                                             # => nil
+    date = @date_offset                                           # => nil
+    @total_offset = key.zip(date).map { |pair| pair.reduce(&:+)}  # ~> NoMethodError: undefined method `zip' for nil:NilClass
     @total_offset
-  end                                                                             # => :generate_total_offset
+  end                                                             # => :generate_total_offset
 
 end  # => :generate_total_offset
 
-# >> [71, 15, 59, 92]
-# >> [0, 2, 2, 5]
+offset = Offset.new.generate_total_offset
 
-message = "tarantula"
-key = [a, b, c, d]
-key.rotate = [b, c, d, a]
-key.rotate = [c, d ,a, b]
-
-message_array = ["a", "b", "c", "d", "e", "f"]
-key = [1, 2, 3, 4]
-
-letter_to_number = message_array.map do |letter|
-  
-end
+# ~> NoMethodError
+# ~> undefined method `zip' for nil:NilClass
+# ~>
+# ~> /Users/bmartenson/turing/1module/projects/enigma/lib/offset.rb:17:in `generate_total_offset'
+# ~> /Users/bmartenson/turing/1module/projects/enigma/lib/offset.rb:23:in `<main>'

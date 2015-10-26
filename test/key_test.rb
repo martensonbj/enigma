@@ -11,22 +11,24 @@ class KeyTest < Minitest::Test
   end
 
   def test_there_is_a_key_method
-    refute_equal nil, @new_key.generate_key_offset
+    refute_equal nil, @new_key.generate_key
   end
 
-  def test_key_generates_a_5_digit_number
-    num = @new_key.generate_key_offset
+  def test_key_generates_a_4_digit_key
+    num = @new_key.generate_key
     assert_equal 4, num.length
   end
 
   def test_it_generates_different_keys_each_run
-    first_key = @new_key.generate_key_offset
-    second_key = @new_key.generate_key_offset
+    first_key = @new_key.generate_key
+    second_key = @new_key.generate_key
     refute_equal first_key, second_key
   end
 
-  def test_it_generates_a_key_offset
-    assert_equal 4, @new_key.generate_key_offset.length
+  def test_the_user_gives_a_5_digit_number
+    key = Key.new(12345)
+    new_offset = key.generate_key
+    assert_equal [12, 23, 34, 45], new_offset
   end
 
 end

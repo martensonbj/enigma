@@ -1,14 +1,14 @@
-require 'pry'
+require 'pry'  # => true
 
 class Character_Set
 
   def initialize(total_offset)
     @total_offset = total_offset
-  end
+  end                             # => :initialize
 
   def character_set
     @characters = ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
-  end
+  end                                                              # => :character_set
 
   def generate_character_number(string=nil)
     message = string
@@ -17,6 +17,6 @@ class Character_Set
       @characters.find_index(letter)
     end
     # RETURNS AN ARRAY OF FIXNUMS
-  end
+  end                                                     # => :generate_character_number
 
-end
+end  # => :generate_character_number
