@@ -9,16 +9,9 @@ class Key
   end
 
   def generate_key
-    key_bucket = []
-    5.times do
-      key_bucket << rand(10)
-    end
-    @key = key_bucket.join
-
+    @key = 5.times.map{ rand(10) }
   end
-  #
-  # @key = Key.new.generate_key
-  # puts @key
+
 
 
 end

@@ -1,57 +1,50 @@
 require 'pry'
-require_relative 'key'
 
 class Offset
 
-  attr_accessor :final_offset, :key, :date
+  attr_accessor :total_offset, :key, :date_offset
 
   def initialize
-    @key = key
-    @date = date
-    @final_offset = final_offset
+    @random_key = random_key
+    @key_offset = key_offset
+    @date_offset = date_offset
+    @total_offset = total_offset
   end
 
   def generate_key
-    key_bucket = []
-    5.times do
-      key_bucket << rand(10)
-    end
-    @key = key_bucket.join
+    @random_key = 5.times.map{ rand(10)to_i }
+    # RETURNS AN ARRAY OF 5 FIXNUMS
   end
 
   def generate_key_offset()
-    key_array = @key.split('')
-    rotated_array = key_array.rotate(1)
-    combined_array = key_array.zip(rotated_array)
-    flattened_array = combined_array.map do |pair|
-      pair.join
+    rotated_key_array = @random_key.rotate(1)
+    combined_key_array = @random_key.zip(rotated_key_array)
+    key_offset = combined_key_array.map do |pair|
+      pair.join.to_i
     end
-    flattened_array.pop
-    return flattened_array
+    key_offset.pop
+    @key_offset
+    end
+    # RETURNS AN ARRAY OF 4 FIXNUMS
   end
 
   def generate_date_offset
     d = Time.new
-    date = d.strftime("%d%m%y").to_i
-    date_squared = date ** 2
+    initial_date = d.strftime("%d%m%y").to_i
+    date_squared = initial_date ** 2
     last_four = date_squared.to_s[-4..-1]
     date_offset_string = last_four.split('')
-      date_offset = date_offset_string.map do |num|
+      @date_offset = date_offset_string.map do |num|
         num.to_i
+        #RETURNS AN ARRAY OF 4 FIXNUMS
       end
+  end
+
+  def generate_total_offset
+    @total_offset = @key_offset.zip(@date_offset).map{|pair| pair.reduce(&:+) }
+    # RETURNS AN ARRAY OF 4 FIXNUMS
   end
 
 
 
 end
-
-
-# KEY: get key from key class
-# For the key, iterate through.
-# concat i + i+1
-# i++
-#
-# 0+1
-# 1+2
-# 2+3
-# 3+4
