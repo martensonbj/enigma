@@ -1,50 +1,36 @@
-require 'pry'
+require 'pry'                   # => true
+require_relative 'key'          # => true
+require_relative 'date_offset'  # => true
 
 class Offset
 
-  attr_accessor :total_offset, :key, :date_offset
+  attr_accessor :total_offset  # => nil
+  # RETURNS AN ARRAY OF 4 FIXNUMS
 
-  def initialize
-    @random_key = random_key
-    @key_offset = key_offset
-    @date_offset = date_offset
-    @total_offset = total_offset
-  end
+  def initialize(key, date)
+    key = Key.new.generate_key_offset
+    date = Date_Offset.new.generate_key_offset
+    @total_offset = nil
+  end                        # => :initialize
 
-  def generate_key
-    @random_key = 5.times.map{ rand(10)to_i }
-    # RETURNS AN ARRAY OF 5 FIXNUMS
-  end
+  def generate_total_offset(key, date)
+    @total_offset = @key_offset.zip(@date_offset).map { |pair| pair.reduce(&:+)}
+    @total_offset
+  end                                                                             # => :generate_total_offset
 
-  def generate_key_offset()
-    rotated_key_array = @random_key.rotate(1)
-    combined_key_array = @random_key.zip(rotated_key_array)
-    key_offset = combined_key_array.map do |pair|
-      pair.join.to_i
-    end
-    key_offset.pop
-    @key_offset
-    end
-    # RETURNS AN ARRAY OF 4 FIXNUMS
-  end
+end  # => :generate_total_offset
 
-  def generate_date_offset
-    d = Time.new
-    initial_date = d.strftime("%d%m%y").to_i
-    date_squared = initial_date ** 2
-    last_four = date_squared.to_s[-4..-1]
-    date_offset_string = last_four.split('')
-      @date_offset = date_offset_string.map do |num|
-        num.to_i
-        #RETURNS AN ARRAY OF 4 FIXNUMS
-      end
-  end
+# >> [71, 15, 59, 92]
+# >> [0, 2, 2, 5]
 
-  def generate_total_offset
-    @total_offset = @key_offset.zip(@date_offset).map{|pair| pair.reduce(&:+) }
-    # RETURNS AN ARRAY OF 4 FIXNUMS
-  end
+message = "tarantula"
+key = [a, b, c, d]
+key.rotate = [b, c, d, a]
+key.rotate = [c, d ,a, b]
 
+message_array = ["a", "b", "c", "d", "e", "f"]
+key = [1, 2, 3, 4]
 
-
+letter_to_number = message_array.map do |letter|
+  
 end

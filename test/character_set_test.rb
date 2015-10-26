@@ -4,7 +4,7 @@ require 'minitest/pride'
 require_relative '../lib/char_set'
 require 'pry'
 
-class CharSetTest < Minitest::Test
+class CharacterSetTest < Minitest::Test
 
   def test_it_includes_a_lowercase_letter
     char = CharSet.new

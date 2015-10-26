@@ -1,27 +1,32 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/key'
+require './lib/key'
 require 'pry'
 
 class KeyTest < Minitest::Test
 
+  def setup
+  @new_key = Key.new
+  end
+
   def test_there_is_a_key_method
-    key = Key.new
-    assert_equal key, key
+    refute_equal nil, @new_key.generate_key_offset
   end
 
   def test_key_generates_a_5_digit_number
-    key = Key.new
-    num = key.generate_key
-    assert_equal 5, num.to_s.length
+    num = @new_key.generate_key_offset
+    assert_equal 4, num.length
   end
 
   def test_it_generates_different_keys_each_run
-    key = Key.new
-    first_key = key.generate_key
-    second_key = key.generate_key
+    first_key = @new_key.generate_key_offset
+    second_key = @new_key.generate_key_offset
     refute_equal first_key, second_key
+  end
+
+  def test_it_generates_a_key_offset
+    assert_equal 4, @new_key.generate_key_offset.length
   end
 
 end
