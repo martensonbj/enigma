@@ -1,44 +1,36 @@
-require 'pry'
-require_relative 'offset'
+require 'pry'              # => true
+require_relative 'offset'  # => true
 
 class Encrypt
 
-  def initialize(message, total_offset)
-    @message = "hello world" #gets.chomp
-    @total_offset = [12, 23, 34, 45]
-  end
-
-  # DEFINE SET OF CHARACTERS
-  def character_set
+  def initialize(message, offset)                            # ~> ArgumentError: wrong number of arguments (0 for 2)
+    @message = message
+    @total_offset = offset
     @characters = ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
-  end
+  end                                                              # => :initialize
 
   # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
-  def generate_character_number(string=nil)
-    message = string
-    character_array = @characters
-    character_numbers = string.split('').map do |letter|
+  def generate_character_number
+    @message.split('').map do |letter|
       @characters.find_index(letter)
     end
     # RETURNS AN ARRAY OF FIXNUMS
-  end
+  end                                   # => :generate_character_number
 
   # ADD CHARACTER NUMBERS TO OFFSET VALUES
-  # def generate_numbers
-  # numbers_array = [10, 10, 10, 10, 10, 10]
-  # total_offset = [1, 2, 3, 4]
-  #   total_char_number = numbers_array.map do |num|
-  #       num + total_offset[0]
-  #       total_offset.rotate
-  #       binding.pry
-  #   end
-  # end
-
   def generate_numbers
-    numbers_array = [10, 10, 10, 10, 10, 10]
-    chunks = numbers_array.each_slice(4).to_a
+    total_char_number = generate_character_number.map do |num|
+        num + @total_offset[0]
+        @total_offset.rotate
+    end
+  end                                                           # => :generate_numbers
+end                                                             # => :generate_numbers
 
+test_final_array = Encrypt.new("hello world", total_offset).generate_numbers
 
-  end
-
-end
+# ~> ArgumentError
+# ~> wrong number of arguments (0 for 2)
+# ~>
+# ~> /Users/bmartenson/turing/1module/projects/enigma/lib/encrypt.rb:6:in `initialize'
+# ~> /Users/bmartenson/turing/1module/projects/enigma/lib/encrypt.rb:29:in `new'
+# ~> /Users/bmartenson/turing/1module/projects/enigma/lib/encrypt.rb:29:in `<main>'

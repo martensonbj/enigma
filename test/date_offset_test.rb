@@ -16,4 +16,9 @@ class DateOffsetTest < Minitest::Test
     assert_equal 4, @date_new.date_offset.length
   end
 
+  def test_user_can_input_date
+    new_date = Date_Offset.new(121185)
+    assert_equal [4, 2, 2, 5], new_date.date_offset
+  end
+
 end
