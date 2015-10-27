@@ -1,3 +1,10 @@
+# enigma = Enigma.new(unencrypted_message, key, date)
+# encrypted_message = enigma.encrypt
+
+require_relative 'offset'
+require_relative 'encrypt'
+require_relative 'date_offset'
+require_relative 'key'
 
 class Enigma
 

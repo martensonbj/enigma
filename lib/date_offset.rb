@@ -11,14 +11,18 @@ class Date_Offset
 
   def generate_date_offset
     if @date
-      @date_offset = @date
-      #FORMAT TO RETURN ARRAY ETC                           # => 121185
+      date_squared = @date ** 2
+      last_four = date_squared.to_s[-4..-1]
+      date_offset_array = last_four.split('')
+      @date_offset = date_offset_array.map do |num|
+        num.to_i
+      end
     else
       initial_date = Time.new.strftime("%d%m%y").to_i
       date_squared = initial_date ** 2
       last_four = date_squared.to_s[-4..-1]
-      date_offset_string = last_four.split('')
-      date_offset_string.map do |num|
+      date_offset_array = last_four.split('')
+      date_offset_array.map do |num|
         num.to_i
       end
     end
@@ -26,4 +30,6 @@ class Date_Offset
 
 end
 
-Date_Offset.new(121185).date_offset
+given = Date_Offset.new(121185).date_offset
+
+random = Date_Offset.new.date_offset

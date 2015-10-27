@@ -37,5 +37,4 @@ class Key
       "#{key_array[index]}#{key_array[index+1]}".to_i unless index == 4
     end.compact
   end
-
 end

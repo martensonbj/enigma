@@ -4,8 +4,6 @@ require 'minitest/pride'
 require_relative '../lib/date_offset'
 require 'pry'
 
-#NEED MORE TESTS???
-
 class DateOffsetTest < Minitest::Test
 
   def setup
