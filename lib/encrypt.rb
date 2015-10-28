@@ -1,18 +1,18 @@
-require 'pry'              # => true
-require_relative 'offset'  # => true
+require 'pry'
+require_relative 'offset'
 
 class Encrypt
 
-    attr_reader :characters  # => nil
+    attr_reader :characters
 
     def initialize(offset)
       # @message = message if recomment add message to initialize
       @total_offset = Offset.new.generate_total_offset
-    end                                                 # => :initialize
+    end
 
     def character_range
       ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
-    end                                                # => :character_range
+    end
 
     # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
     def character_index_value(message)
@@ -20,7 +20,7 @@ class Encrypt
         character_range.find_index(letter)
       end
       # RETURNS AN ARRAY OF FIXNUMS
-    end                                     # => :character_index_value
+    end
 
     # ADD INDEX VALUE TO OFFSET VALUES
     def combine_offset_and_numbers(character_index_value)
@@ -30,7 +30,7 @@ class Encrypt
         new_value
       end
       combined_total
-    end                                                    # => :combine_offset_and_numbers
+    end
 
     # REDUCE ARRAY OF NUMBERS BY 39
     def reduce_numbers(array)
@@ -38,7 +38,7 @@ class Encrypt
         num % 39
       end
       reduced_array
-    end                                                        # => :reduce_numbers
+    end
 
     # ENCRYPT MESSAGE
     def generate_encrypted_message(reduced)
@@ -46,9 +46,7 @@ class Encrypt
         character_range.values_at(num)
       end
       encrypted_message.join
-    end                                                # => :generate_encrypted_message
+    end
 
 
-# test_final_array = Encrypt.new("hello world", @total_offset).combine_offset_and_numbers
-
-end  # => :generate_encrypted_message
+end

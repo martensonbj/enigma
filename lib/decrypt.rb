@@ -5,8 +5,8 @@ class Decrypt
 
     attr_reader :characters
 
-    def initialize(message, offset)
-      @message = message
+    def initialize(offset)
+      # @message = message if recomment add message to initialize
       @total_offset = Offset.new.generate_total_offset
     end
 
@@ -15,15 +15,15 @@ class Decrypt
     end
 
     # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
-    def generate_numbers_from_message
-      @message.split('').map do |letter|
+    def character_index_value(message)
+      message.split('').map do |letter|
         character_range.find_index(letter)
       end
       # RETURNS AN ARRAY OF FIXNUMS
     end
 
-    def combine_offset_and_numbers
-      combined_total = generate_numbers_from_message.map do |num|
+    def combine_offset_and_numbers(character_index_value)
+      combined_total = character_index_value.map do |num|
         new_value = num - @total_offset[0]
         @total_offset = @total_offset.rotate
         new_value
@@ -32,20 +32,19 @@ class Decrypt
     end
 
     # REDUCE ARRAY OF NUMBERS BY 39
-    def reduce_numbers
-      reduced_array = combine_offset_and_numbers.map do |num|
+    def reduce_numbers(array)
+      reduced_array = array.map do |num|
         num % 39
       end
       reduced_array
     end
 
-    def generate_decrypted_message
+    # DECRYPT MESSAGE
+    def generate_decrypted_message(reduced)
       decrypted_message = reduce_numbers.map do |num|
         character_range.values_at(num)
       end
       decrypted_message.join
-      binding.pry
     end
 
 end
-  message = Decrypt.new("snggfe", @total_offset)

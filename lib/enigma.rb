@@ -1,11 +1,9 @@
-# > e = Enigma.new
-
-require_relative 'offset'       # => true
-require_relative 'encrypt'      # => true
-require_relative 'decrypt'      # => true
+require_relative 'offset'
+require_relative 'encrypt'
+require_relative 'decrypt'
 # require_relative 'crack'
-require_relative 'date_offset'  # => false
-require_relative 'key'          # => false
+require_relative 'date_offset'
+require_relative 'key'
 
 class Enigma
 
@@ -14,7 +12,8 @@ class Enigma
     date = Date_Offset.new(user_date).date_offset
     offset = Offset.new.generate_total_offset
     @encrypt = Encrypt.new(offset)
-  end                                              # => :initialize
+    @decrypt = Decrypt.new(offset)
+  end
 
   def encrypt(message, key=nil, date=nil)
     e = @encrypt
@@ -23,22 +22,26 @@ class Enigma
     e.combine_offset_and_numbers(numbers)
     reduced = e.reduce_numbers(combined_total)
     e.generate_encrypted_message(reduced)
-
-
-    # e.encrypt(my_message)
-    # e.encrypt(my_message, 12345, Date.today)
-  end  # => :encrypt
+    # e = Enigma.new
+    # en = e.encrypt("message", opt-key, opt-date)
+  end
 
   def decrypt(message, key, date=nil)
+    e = @decrypt
+    numbers = e.character_index_value(message)
+    combined_total =
+    e.combine_offset_and_numbers(numbers)
+    reduced = e.reduce_numbers(combined_total)
+    e.generate_decrypted_message(reduced)
     # e.decrypt(output, 12345, Date.today)
     # e.decrypt(output, 12345)
-  end                                  # => :decrypt
+  end
 
   def crack(message, key=nil, date=nil)
     # e.crack(output, Date.today)
     # e.crack(output)
 
-  end  # => :crack
+  end
 
 
-end  # => :crack
+end
