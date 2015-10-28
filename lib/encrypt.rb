@@ -1,26 +1,26 @@
-require 'pry'
-require_relative 'offset'
+require 'pry'              # => true
+require_relative 'offset'  # => true
 
 class Encrypt
 
-    attr_reader :characters
+    attr_reader :characters  # => nil
 
-    def initialize(message, offset)
-      @message = message
+    def initialize(offset)
+      # @message = message if recomment add message to initialize
       @total_offset = Offset.new.generate_total_offset
-    end
+    end                                                 # => :initialize
 
     def character_range
       ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
-    end
+    end                                                # => :character_range
 
     # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
-    def character_index_value
-      @message.split('').map do |letter|
+    def character_index_value(message)
+      message.split('').map do |letter|
         character_range.find_index(letter)
       end
       # RETURNS AN ARRAY OF FIXNUMS
-    end
+    end                                     # => :character_index_value
 
     # ADD INDEX VALUE TO OFFSET VALUES
     def combine_offset_and_numbers(character_index_value)
@@ -30,26 +30,25 @@ class Encrypt
         new_value
       end
       combined_total
-    end
+    end                                                    # => :combine_offset_and_numbers
 
     # REDUCE ARRAY OF NUMBERS BY 39
-    def reduce_numbers(combined_total)
-      reduced_array = combine_offset_and_numbers.map do |num|
+    def reduce_numbers(array)
+      reduced_array = array.map do |num|
         num % 39
       end
       reduced_array
-      binding.pry
-    end
+    end                                                        # => :reduce_numbers
 
     # ENCRYPT MESSAGE
-    def generate_encrypted_message
-      encrypted_message = reduce_numbers.map do |num|
+    def generate_encrypted_message(reduced)
+      encrypted_message = reduced.map do |num|
         character_range.values_at(num)
       end
       encrypted_message.join
-    end
+    end                                                # => :generate_encrypted_message
 
 
-test_final_array = Encrypt.new("hello world", @total_offset).combine_offset_and_numbers
+# test_final_array = Encrypt.new("hello world", @total_offset).combine_offset_and_numbers
 
-end
+end  # => :generate_encrypted_message
