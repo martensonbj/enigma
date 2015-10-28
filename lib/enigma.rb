@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'offset'
 require_relative 'encrypt'
 require_relative 'decrypt'
@@ -27,12 +28,14 @@ class Enigma
   end
 
   def decrypt(message, key, date=nil)
+
     e = @decrypt
     numbers = e.character_index_value(message)
     combined_total =
     e.combine_offset_and_numbers(numbers)
     reduced = e.reduce_numbers(combined_total)
     e.generate_decrypted_message(reduced)
+
     # e.decrypt(output, 12345, Date.today)
     # e.decrypt(output, 12345)
   end
@@ -40,7 +43,6 @@ class Enigma
   def crack(message, key=nil, date=nil)
     # e.crack(output, Date.today)
     # e.crack(output)
-
   end
 
 

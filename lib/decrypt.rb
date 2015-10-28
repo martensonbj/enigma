@@ -3,8 +3,6 @@ require_relative 'offset'
 
 class Decrypt
 
-    attr_reader :characters
-
     def initialize(offset)
       # @message = message if recomment add message to initialize
       @total_offset = Offset.new.generate_total_offset
@@ -27,8 +25,10 @@ class Decrypt
         new_value = num - @total_offset[0]
         @total_offset = @total_offset.rotate
         new_value
+
       end
       combined_total
+
     end
 
     # REDUCE ARRAY OF NUMBERS BY 39
