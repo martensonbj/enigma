@@ -32,17 +32,7 @@ class Enigma
     e.generate_decrypted_message(reduced)
   end
 
-  def crack(message, key=nil, date=nil)
-    # e.crack(output, Date.today)
-    # e.crack(output)
+  def crack(message)
   end
 
-
 end
-
-# e = Enigma.new.encrypt("hello", 93445)  # => [7, 4, 11, 11, 14]
-# e = Enigma.new.encrypt("hello", 93445) # => [100, 40, 57, 61, 107]
-# e = Enigma.new.encrypt("hello", 93445) # => [22, 1, 18, 22, 29]
-e = Enigma.new.encrypt("hello", 93445)
-# e = Enigma.new.encrypt("hello", 93445) # => "wbsw3"
-d = Enigma.new.decrypt("wbsw3", 93445)

@@ -1,31 +1,36 @@
-require 'pry'  # => true
+require 'pry'
 
 class Date_Offset
 
-  attr_reader :date_offset               # => nil
-  #RETURNS AN ARRAY OF 4 FIXNUMS
+  attr_reader :date_offset
+  
   def initialize(date=nil)
     @date = date
     @date_offset = generate_date_offset
-  end                                    # => :initialize
+  end
 
   def generate_date_offset
     if @date
-      date_squared = @date ** 2
-      last_four = date_squared.to_s[-4..-1]
-      date_offset_array = last_four.split('')
-      @date_offset = date_offset_array.map do |num|
-        num.to_i
-      end
+      generate_given_date
     else
-      initial_date = Time.new.strftime("%d%m%y").to_i
-      date_squared = initial_date ** 2
-      last_four = date_squared.to_s[-4..-1]
-      date_offset_array = last_four.split('')
-      date_offset_array.map do |num|
-        num.to_i
-      end
+      generate_todays_date
     end
-  end                                                  # => :generate_date_offset
+  end
 
-end  # => :generate_date_offset
+  def generate_given_date
+    last_four = (@date ** 2).to_s[-4..-1]
+    date_offset_array = last_four.split('')
+    @date_offset = date_offset_array.map do |num|
+      num.to_i
+    end
+  end
+
+  def generate_todays_date
+    initial_date = Time.new.strftime("%d%m%y").to_i
+    date_offset_array = ((initial_date ** 2).to_s[-4..-1]).split('')
+    date_offset_array.map do |num|
+      num.to_i
+    end
+  end
+
+end

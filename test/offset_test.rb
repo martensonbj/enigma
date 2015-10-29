@@ -6,11 +6,7 @@ require 'pry'
 
 class OffsetTest < Minitest::Test
 
-  # HOW TO TEST FOR INPUT TYPES???
-
   def setup
-    # key = Key.new.generate_key
-    # date = Date_Offset.new.generate_date_offset
     @offset = Offset.new
   end
 
@@ -28,7 +24,5 @@ class OffsetTest < Minitest::Test
     assert_equal 4, @offset.generate_total_offset.length
     assert_equal Array, @offset.generate_total_offset.class
   end
-
-
 
 end
