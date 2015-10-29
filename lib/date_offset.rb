@@ -1,13 +1,13 @@
-require 'pry'
+require 'pry'  # => true
 
 class Date_Offset
 
-  attr_reader :date_offset
+  attr_reader :date_offset               # => nil
   #RETURNS AN ARRAY OF 4 FIXNUMS
   def initialize(date=nil)
     @date = date
     @date_offset = generate_date_offset
-  end
+  end                                    # => :initialize
 
   def generate_date_offset
     if @date
@@ -26,10 +26,6 @@ class Date_Offset
         num.to_i
       end
     end
-  end
+  end                                                  # => :generate_date_offset
 
-end
-
-given = Date_Offset.new(121185).date_offset
-
-random = Date_Offset.new.date_offset
+end  # => :generate_date_offset

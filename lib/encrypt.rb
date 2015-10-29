@@ -3,15 +3,12 @@ require_relative 'offset'
 
 class Encrypt
 
-    attr_reader :characters
-
     def initialize(offset)
-      # @message = message if recomment add message to initialize
-      @total_offset = Offset.new.generate_total_offset
+      @offset = offset
     end
 
     def character_range
-      ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
+      ('a'..'z').to_a + ('0'..'9').to_a + ['.', ',', ' ']
     end
 
     # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
@@ -24,12 +21,11 @@ class Encrypt
 
     # ADD INDEX VALUE TO OFFSET VALUES
     def combine_offset_and_numbers(character_index_value)
-      combined_total = character_index_value.map do |num|
-        new_value = num + @total_offset[0]
-        @total_offset = @total_offset.rotate
+      character_index_value.map do |num|
+        new_value = num + @offset[0]
+        @offset = @offset.rotate
         new_value
       end
-      combined_total
     end
 
     # REDUCE ARRAY OF NUMBERS BY 39
@@ -47,6 +43,6 @@ class Encrypt
       end
       encrypted_message.join
     end
-
-
 end
+
+Encrypt.new([93, 36, 46, 50]).character_index_value("hello")

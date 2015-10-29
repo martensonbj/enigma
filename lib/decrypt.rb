@@ -4,12 +4,11 @@ require_relative 'offset'
 class Decrypt
 
     def initialize(offset)
-      # @message = message if recomment add message to initialize
-      @total_offset = Offset.new.generate_total_offset
+      @offset = offset
     end
 
     def character_range
-      ('a'..'z').to_a + (0..9).to_a + ['.', ',', ' ']
+      ('a'..'z').to_a + ('0'..'9').to_a + ['.', ',', ' ']
     end
 
     # MAP CHARACTERS TO ASSOCIATED INDEX VALUES
@@ -21,14 +20,11 @@ class Decrypt
     end
 
     def combine_offset_and_numbers(character_index_value)
-      combined_total = character_index_value.map do |num|
-        new_value = num - @total_offset[0]
-        @total_offset = @total_offset.rotate
+      character_index_value.map do |num|
+        new_value = num - @offset[0]
+        @offset = @offset.rotate
         new_value
-
       end
-      combined_total
-
     end
 
     # REDUCE ARRAY OF NUMBERS BY 39
@@ -41,10 +37,11 @@ class Decrypt
 
     # DECRYPT MESSAGE
     def generate_decrypted_message(reduced)
-      decrypted_message = reduce_numbers.map do |num|
+      decrypted_message = reduced.map do |num|
         character_range.values_at(num)
       end
       decrypted_message.join
     end
-
 end
+
+Decrypt.new([93, 36, 46, 50]).character_index_value("hello")

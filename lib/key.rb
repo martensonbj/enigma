@@ -3,10 +3,6 @@ require 'pry'
 class Key
 
   attr_reader :key_offset
-  # RETURNS AN ARRAY OF 4 FIXNUMS
-
-  # BREAK UP INTO MORE METHODS??
-  # REWRITE SO USER CAN PROVIDE A KEY
 
   def initialize(key=nil)
     @key = key
