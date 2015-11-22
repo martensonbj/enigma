@@ -1,11 +1,10 @@
-require 'pry'
-
 class Key
 
   attr_reader :key_offset
 
   def initialize(key=nil)
     @key = key
+    binding.pry
     @key_offset = generate_key
   end
 

@@ -1,9 +1,7 @@
-require 'pry'
-
 class Date_Offset
 
   attr_reader :date_offset
-  
+
   def initialize(date=nil)
     @date = date
     @date_offset = generate_date_offset

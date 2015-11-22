@@ -2,7 +2,6 @@ gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/date_offset'
-require 'pry'
 
 class DateOffsetTest < Minitest::Test
 
