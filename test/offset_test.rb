@@ -4,7 +4,6 @@ require 'minitest/pride'
 require_relative '../lib/offset'
 require_relative '../lib/key'
 require_relative '../lib/date_offset'
-require 'pry'
 
 class OffsetTest < Minitest::Test
 

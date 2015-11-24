@@ -1,7 +1,6 @@
 require_relative 'offset'
 require_relative 'date_offset'
 require_relative 'enigma'
-require 'pry'
 
 class Cracked
 
@@ -10,7 +9,6 @@ class Cracked
     def initialize(message, date=nil)
       @message = message
       @date_offsets = Date_Offset.new(date).date_offset
-      # @crack_offset = crack_offset_calculator
     end
 
     def character_range

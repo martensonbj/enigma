@@ -3,7 +3,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/cracked'
 require_relative '../lib/enigma'
-require 'pry'
 
 class CrackedTest < Minitest::Test
 
@@ -83,6 +82,5 @@ class CrackedTest < Minitest::Test
   def test_crack_message_converts_reduced_array
     assert_equal "j 66nd..", @cr0.crack_message
   end
-
 
 end

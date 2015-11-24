@@ -2,12 +2,11 @@ gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/key'
-require 'pry'
 
 class KeyTest < Minitest::Test
 
   def setup
-  @new_key = Key.new
+    @new_key = Key.new
   end
 
   def test_class_key_exists
