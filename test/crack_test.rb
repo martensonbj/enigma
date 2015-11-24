@@ -5,13 +5,13 @@ require_relative '../lib/crack'
 require_relative '../lib/enigma'
 require 'pry'
 
-class DecryptTest < Minitest::Test
-
-  attr_reader :offset
+class CrackTest < Minitest::Test
 
   def setup
     @cr = Crack.new("hi..end..")
     @cr2 = Crack.new("xx123xx")
+    @cr3 = Crack.new("oi.6lnd6e")
+    # @cr3 = Crack.new("s.9spccsi")
   end
 
   def test_class_exists
@@ -38,7 +38,7 @@ class DecryptTest < Minitest::Test
     assert_equal [36, 36, 3, 13, 4, 36, 36, 8, 7], @cr.character_index_value
   end
 
-  def test_it_grabs_the_first_7_letters
+  def test_it_grabs_the_first_7_letter_indexes
     target_message_key = [36, 36, 3, 13, 4, 36, 36]
     assert_equal [36, 36, 3, 13, 4, 36, 36], @cr.target_message
   end
@@ -51,10 +51,43 @@ class DecryptTest < Minitest::Test
     assert_equal [13, 13, -26, -15], @cr2.crack_offset
   end
 
-  # def test_figure_shit_out_returns_something
-  #   assert_equal [1,2,3,4], @cr.figure_out_shit
-  # end
+  def test_it_creates_todays_a_date_offset_if_no_date_provided
+    assert_equal [3, 2, 2, 5], @cr.date
+  end
 
+  def test_crack_offset_iterates_through_entire_message
+    offset = [13, 13, -26, -15]
+    assert_equal 9, @cr.apply_crack_offset_to_message(offset).length
+  end
 
+  def test_first_letter_of_message_is_correctly_subtracted
+   offset = [13, 13, -26, -15]
+   assert_equal 23, @cr.apply_crack_offset_to_message(offset)[0]
+  end
+
+  def test_5th_value_of_message_is_correctly_subtracted
+    offset = [13, 13, -26, -15]
+    assert_equal -9, @cr.apply_crack_offset_to_message(offset)[4]
+  end
+
+  def test_modulo_is_calculated_from_new_values
+    offset = [13, 13, -26, -15]
+    assert_equal 30, @cr.modulo_of_new_values(offset)[4]
+  end
+
+  def test_crack_message_creates_array_of_letters
+    char_values = [36, 36, 3, 13, 4, 36, 36, 8, 7]
+    offset = [13, 13, -26, -15]
+    # assert_equal ["x", "x", "3", "2", "4", "x", "x", "x", "7"], @cr.crack_message
+    assert_equal "..dne..ih", @cr.crack_message
+  end
+
+  def test_crack_message_cracks_another_message
+    assert_equal "l2dns2.iv", @cr3.crack_message
+    #<Crack:0x007fbcc2b3c780 @crack_offset=[32, 4, 0, 0], @date=[3, 2, 2, 5], @message="oi.6lnd6e">
+  end
+
+  def test_if_modulo_is_0_test_last_4_digits_string
+    
 
 end

@@ -4,7 +4,6 @@ class Key
 
   def initialize(key=nil)
     @key = key
-    binding.pry
     @key_offset = generate_key
   end
 

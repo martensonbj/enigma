@@ -71,6 +71,7 @@ class EncryptTest < Minitest::Test
     combined_total = @encrypt_4.combine_offset_and_numbers(numbers)
     reduced = @encrypt_4.reduce_numbers(combined_total)
     assert_equal "zxh", @encrypt_4.generate_encrypted_message(reduced)
+    binding.pry
   end
 
 end

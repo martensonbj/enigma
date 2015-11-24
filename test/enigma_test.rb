@@ -75,5 +75,5 @@ class EnigmaTest < Minitest::Test
     d = @en.decrypt("x8rzmxn8", 23132)
     assert_equal "abc123,.", d
   end
-  
+
 end
