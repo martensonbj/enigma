@@ -13,12 +13,6 @@ class DateOffsetTest < Minitest::Test
     assert Date_Offset
   end
 
-  def test_date_must_be_a_number
-    skip
-    date = Date_Offset.new("hi")
-    assert_raise
-  end
-
   def test_date_is_created_without_input
     refute_equal nil, @date_new.generate_todays_date
   end

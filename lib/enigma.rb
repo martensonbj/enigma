@@ -1,7 +1,7 @@
 require_relative 'offset'
 require_relative 'encrypt'
 require_relative 'decrypt'
-require_relative 'crack'
+require_relative 'cracked'
 require_relative 'date_offset'
 require_relative 'key'
 
@@ -33,7 +33,7 @@ class Enigma
   end
 
   def crack(message, date=nil)
-    c = Crack.new(message)
+    c = Cracked.new(message, date=nil)
     c.crack_message
   end
 

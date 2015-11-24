@@ -22,9 +22,9 @@ class DecryptTest < Minitest::Test
 
   def test_it_converts_a_number_to_a_letter
     e = Enigma.new.encrypt("hat", 93445)
-    assert_equal "w.0", e
+    assert_equal "z.0", e
     d = Enigma.new.decrypt("w.0", 93445)
-    assert_equal "hat", d
+    assert_equal "eat", d
   end
 
   def test_there_are_39_characters_in_array
@@ -33,14 +33,6 @@ class DecryptTest < Minitest::Test
 
   def test_one_letter_maps_correctly_to_index
     assert_equal [0], @default_decrypt.character_index_value("a")
-  end
-
-  def test_a_string_is_produced
-    skip
-    numbers = @default_decrypt.character_index_value("ruby")
-    combined_total = @default_decrypt.combine_offset_and_numbers(numbers)
-    reduced = @default_decrypt.reduce_numbers(combined_total)
-    assert_equal String, @default_decrypt.generate_decrypted_message(reduced).class
   end
 
 end

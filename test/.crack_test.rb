@@ -88,6 +88,6 @@ class CrackTest < Minitest::Test
   end
 
   def test_if_modulo_is_0_test_last_4_digits_string
-    
+
 
 end
